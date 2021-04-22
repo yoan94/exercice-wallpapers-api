@@ -3,6 +3,7 @@ const { MongoClient } = require('mongodb');
 const client = new MongoClient('mongodb://localhost/wallpapers', { useUnifiedTopology: true });
 
 let db = null;
+/** @type {import('mongodb').Collection} */
 let Wallpapers = null;
 
 const connect = async function () {
@@ -15,6 +16,10 @@ const connect = async function () {
 
 module.exports = {
   connect,
-  db,
-  Wallpapers,
+  db() {
+    return db;
+  },
+  Wallpapers() {
+    return Wallpapers;
+  },
 };

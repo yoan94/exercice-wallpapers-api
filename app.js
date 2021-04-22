@@ -25,8 +25,11 @@ app.use((err, req, res, next) => {
   res.locals.error = req.app.get('env') === 'development' ? err : {};
 
   // render the error page
+  console.error(err);
   res.status(err.status || 500);
-  res.render('error');
+  res.send({
+    error: err.toString(),
+  });
 });
 
 database.connect().then(() => {
